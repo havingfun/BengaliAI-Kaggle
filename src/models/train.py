@@ -1,7 +1,7 @@
 import os
 import ast
 import sys
-sys.path.append('/Users/rkumar/Desktop/NextPrediction/Kaggle101/BengaliAI/')
+sys.path.append('BengaliAI-Kaggle')
 from src.data.dataset import BengaliDatasetTrain
 from model_dispatcher import MODEL_DISPATCHER
 from torch import torch
