@@ -8,7 +8,7 @@ from torch import torch
 
 class BengaliDatasetTrain:
     def __init__(self, folds, img_width, img_height, mean, std):
-        df = pd.read_csv('../data/train_folds.csv')
+        df = pd.read_csv('../../data/train_folds.csv')
         df = df[["image_id", "grapheme_root", "vowel_diacritic", "consonant_diacritic", "kfold"]]
 
         df = df[df.kfold.isin(folds)].reset_index(drop=True)
@@ -35,7 +35,7 @@ class BengaliDatasetTrain:
 
 
     def __getitem__(self, item):
-        image = joblib.load(f'../data/images/{self.image_ids[item]}.pkl')
+        image = joblib.load(f'../../data/images/{self.image_ids[item]}.pkl')
         image = image.reshape(137, 236).astype('float')
         image = Image.fromarray(image).convert('RGB')
         image = self.aug(image=np.array(image))["image"]
