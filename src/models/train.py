@@ -69,7 +69,6 @@ def evaluate(dataset, data_loader, model):
         consonant_diacritic = d["consonant_diacritic"]
         vowel_diacritic = d["vowel_diacritic"]
 
-        optimizer.zero_grad()
         image = image.to(DEVICE, dtype=torch.float)
         grapheme_root = grapheme_root.to(DEVICE, dtype=torch.long)
         vowel_diacritic = vowel_diacritic.to(DEVICE, dtype=torch.long)
