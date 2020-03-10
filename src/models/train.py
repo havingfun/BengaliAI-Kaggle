@@ -1,7 +1,7 @@
 import os
 import ast
 import sys
-sys.path.append('/Users/rkumar/Desktop/NextPrediction/Kaggle101/BengaliAI/')
+sys.path.append('BengaliAI-Kaggle/')
 from src.data.dataset import BengaliDatasetTrain
 from model_dispatcher import MODEL_DISPATCHER
 from torch import torch
@@ -69,7 +69,6 @@ def evaluate(dataset, data_loader, model):
         consonant_diacritic = d["consonant_diacritic"]
         vowel_diacritic = d["vowel_diacritic"]
 
-        optimizer.zero_grad()
         image = image.to(DEVICE, dtype=torch.float)
         grapheme_root = grapheme_root.to(DEVICE, dtype=torch.long)
         vowel_diacritic = vowel_diacritic.to(DEVICE, dtype=torch.long)
@@ -126,9 +125,10 @@ def main():
 
     for epoch in range(0, EPOCHS):
         train(train_dataset, train_loader, model, optimizer)
-        val_score = evaluate(valid_dataset, valid_loader, model)
+        with torch.no_grad():
+            val_score = evaluate(valid_dataset, valid_loader, model)
         scheduler.step(val_score)
-        torch.save(model.state_dict(), f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.nn")
+        torch.save(model.state_dict(), f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ import pandas as pd
 from iterstrat.ml_stratifiers import MultilabelStratifiedKFold
 
 if __name__ == "__main__":
-    df = pd.read_csv('../data/train.csv')
+    df = pd.read_csv('BengaliAI-Kaggle/data/train.csv')
     print(df.head())
     df.loc[:, 'kfold'] = -1
 
@@ -18,4 +18,4 @@ if __name__ == "__main__":
         df.loc[val_, 'kfold'] = fold
     
     print(df.kfold.value_counts())
-    df.to_csv('../data/train_folds.csv', index=False)
+    df.to_csv('BengaliAI-Kaggle/data/train_folds.csv', index=False)
