@@ -128,7 +128,7 @@ def main():
         with torch.no_grad():
           val_score = evaluate(valid_dataset, valid_loader, model)
         scheduler.step(val_score)
-        torch.save(model.state_dict(), f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.nn")
+        torch.save(model.state_dict(), f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.bin")
 
 
 if __name__ == "__main__":
