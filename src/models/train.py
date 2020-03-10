@@ -125,7 +125,8 @@ def main():
 
     for epoch in range(0, EPOCHS):
         train(train_dataset, train_loader, model, optimizer)
-        val_score = evaluate(valid_dataset, valid_loader, model)
+        with torch.no_grad():
+          val_score = evaluate(valid_dataset, valid_loader, model)
         scheduler.step(val_score)
         torch.save(model.state_dict(), f"{BASE_MODEL}_fold{VALIDATION_FOLDS[0]}.nn")
 
